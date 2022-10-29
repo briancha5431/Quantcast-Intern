@@ -18,3 +18,11 @@ This returns the most often appeared Cookie ID regardless of date.
 I also wrote cookie_log_maker.py to make a random cookie log for testing purposes.
 
 I wrote the code such that a user that makes any syntax mistakes will understand what mistake they have made. 
+
+### My Files
+
+- most_active_cookie.py: My main program. Finds the most active cookie.
+- cookie_log.csv: The given csv file from the problem statement.
+- mega_tester.csv: A csv file made by cookie_log_maker.py. Currently has 1000 Cookie IDs, but this can be changed.
+- cookie_log_maker.py: A program that makes a new CSV file or edits an existing CSV file. It writes in custom Cookie IDs.
+- test.ipynb: A notebook I used to play around with the code.
