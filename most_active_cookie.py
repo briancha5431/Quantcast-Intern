@@ -7,7 +7,7 @@ import csv
 '''
 helper function: "date_checker"
 input: a date that is a string
-output: returns true if the string is in the proper format "YYYY-MM-DD" and if the date 
+output: returns true if the string is in the proper format "YYYY-MM-DD" and if the date
 is valid.
 '''
 
@@ -55,6 +55,8 @@ output: doesn't return anything, but prints out most active cookies
 
 def active_finder(csv_file, date):
 
+    # counts the max number of times any cookie was in log
+    max_counter = 0
     # in case no date was inputted
     if date == "":
 
@@ -62,9 +64,6 @@ def active_finder(csv_file, date):
         # key: the cookie
         # value: the number of times the cookie was seen in log
         non_date = {}
-
-        # counts the max number of times any cookie was in log
-        max_counter = 0
 
         # opens csv
         with open(csv_file, 'r') as checker:
@@ -75,6 +74,9 @@ def active_finder(csv_file, date):
                 if line[0] != "cookie":
                     # if new cookie ID is encountered, put into non_date dictionary
                     if line[0] not in non_date:
+                        # just makes sure to increment max_counter
+                        if max_counter < 1:
+                            max_counter += 1
                         non_date[line[0]] = 1
                     # else, increment count (the value) of cookie ID by one
                     else:
@@ -96,9 +98,6 @@ def active_finder(csv_file, date):
         # value: the number of times the cookie was seen in log
         with_date = {}
 
-        # counts the max number of times any cookie was in log
-        max_counter = 1
-
         # opens csv
         with open(csv_file, 'r') as checker:
             csv_reader = csv.reader(checker)
@@ -109,6 +108,9 @@ def active_finder(csv_file, date):
                     # if new cookie ID is encountered, put into with_date dictionary
                     # AND the date from the CSV file must be equal to the inputted date
                     if line[0] not in with_date and line[1][0:10] == date:
+                        # just makes sure to increment max_counter
+                        if max_counter < 1:
+                            max_counter += 1
                         with_date[line[0]] = 1
                     # else, increment count (the value) of cookie ID by one
                     elif line[1][0:10] == date:
@@ -122,6 +124,10 @@ def active_finder(csv_file, date):
         for x in with_date:
             if with_date[x] == max_counter:
                 print(x)
+
+    # oh no! no matches
+    if max_counter == 0:
+        print("Sorry, there was no cookies that matched your criteria.")
 
 
 '''
